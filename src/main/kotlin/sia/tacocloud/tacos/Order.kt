@@ -42,7 +42,10 @@ class Order (
     var placedAt: Date? = null,
 
     @field:ManyToMany(targetEntity = Taco::class)
-    var tacos: MutableList<Taco> = mutableListOf()
+    var tacos: MutableList<Taco> = mutableListOf(),
+
+    @field:ManyToOne
+    var users: Users? = null
 ): Serializable {
 
     private val serialVersionUID: Long = 1L
