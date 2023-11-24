@@ -1,12 +1,18 @@
 package sia.tacocloud.tacos
 
+import jakarta.persistence.*
 import jakarta.validation.constraints.Digits
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import org.hibernate.validator.constraints.CreditCardNumber
+import java.io.Serializable
 import java.util.Date
 
-data class Order(
+@Entity
+@Table(name="`Order`")
+class Order (
+    @field:Id
+    @field:GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
 
     @field:NotBlank(message = "Name is required")
@@ -35,9 +41,18 @@ data class Order(
 
     var placedAt: Date? = null,
 
+    @field:ManyToMany(targetEntity = Taco::class)
     var tacos: MutableList<Taco> = mutableListOf()
-) {
+): Serializable {
+
+    private val serialVersionUID: Long = 1L
+
     fun addDesign(design: Taco) {
         this.tacos.add(design)
+    }
+
+    @PrePersist
+    fun placedAt() {
+        this.placedAt = Date()
     }
 }

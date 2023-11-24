@@ -1,8 +1,10 @@
 package sia.tacocloud.tacos.data
 
+import org.springframework.data.repository.CrudRepository
 import sia.tacocloud.tacos.Order
+import java.util.*
 
-interface OrderRepository {
+interface OrderRepository: CrudRepository<Order, Long> {
 
-    fun save(order: Order): Order
+    fun readOrdersByDeliveryZipAndPlacedAtBetween(deliveryZip: String, startDate: Date, endDate: Date): List<Order>
 }

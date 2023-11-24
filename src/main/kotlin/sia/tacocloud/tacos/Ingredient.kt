@@ -1,9 +1,14 @@
 package sia.tacocloud.tacos
 
-data class Ingredient(
-    val id: String,
-    val name: String,
-    val type: Type,
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+
+@Entity
+class Ingredient(
+    @field:Id
+    var id: String,
+    var name: String,
+    var type: Type,
 ) {
     enum class Type {
         WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE

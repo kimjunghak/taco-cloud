@@ -10,6 +10,6 @@ class IngredientByIdConverter(
     private val ingredientRepository: IngredientRepository
 ) : Converter<String, Ingredient> {
     override fun convert(id: String): Ingredient? {
-        return ingredientRepository.findById(id)
+        return ingredientRepository.findById(id).let { if(it.isEmpty) null else it.get() }
     }
 }
