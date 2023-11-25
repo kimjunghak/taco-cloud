@@ -1,8 +1,12 @@
 package sia.tacocloud.tacos.web
 
 import jakarta.validation.Valid
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
@@ -18,7 +22,8 @@ import sia.tacocloud.tacos.data.OrderRepository
 @RequestMapping("/orders")
 @SessionAttributes("order")
 class OrderController(
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val orderProps: OrderProps,
 ) {
 
     @GetMapping("/current")
@@ -43,5 +48,12 @@ class OrderController(
         orderRepository.save(order)
         sessionStatus.setComplete()
         return "redirect:/"
+    }
+
+    @GetMapping
+    fun ordersForUser(@AuthenticationPrincipal users: Users, model: Model): String {
+        val pageable = PageRequest.of(0, orderProps.pageSize)
+        model.addAttribute("orders", orderRepository.findByUsersOrderByPlacedAtDesc(users, pageable))
+        return "orderList"
     }
 }

@@ -52,3 +52,14 @@ MvcRequestMatcher을 이용하여 Servlet을 정확하게 지정해준다.
 ```text
 This is because there is more than one mappable servlet in your servlet context: {org.h2.server.web.JakartaWebServlet=[/h2-console/*], org.springframework.web.servlet.DispatcherServlet=[/]}.
 ```
+
+```yaml
+spring:
+  profiles: prod
+--- 
+spring:
+  config:
+    activate:
+      on-profile: prod
+```
+spring boot 2.4.0 부터는 spring.profiles: prod 와 같은 방식으로 profile을 설정할 수 없다.
