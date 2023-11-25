@@ -1,6 +1,6 @@
 ## Taco Cloud Kotlin + Spring 구현
 
-[[Spring In Action 5]]
+### Spring In Action 5
 
 ### 오류 리스트
 ```kotlin
@@ -63,3 +63,8 @@ spring:
       on-profile: prod
 ```
 spring boot 2.4.0 부터는 spring.profiles: prod 와 같은 방식으로 profile을 설정할 수 없다.
+
+
+### 참고
+CH06 부터는 진행할 수 없어서 Repository 변경   
+[SpringInAction5](https://github.com/kimjunghak/SpringInAction5)

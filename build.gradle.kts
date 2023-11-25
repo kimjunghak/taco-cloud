@@ -35,6 +35,8 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-configuration-processor")
 
+    implementation("org.springframework.boot:spring-boot-starter-hateoas")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 
